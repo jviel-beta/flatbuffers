@@ -1464,6 +1464,7 @@ class TsGenerator : public BaseGenerator {
 
       // FIXME: if field_type and field_field are identical, then
       // this generates invalid typescript.
+      GenDocComment(field.doc_comment, &obj_api_class);
       constructor_func += "  public " + field_field + ": " + field_type +
                           " = " + field_default_val;
 
@@ -1515,6 +1516,7 @@ class TsGenerator : public BaseGenerator {
                                GetPrefixedName(struct_def) + "(builder);";
     }
     obj_api_class = "\n";
+    GenDocComment(struct_def.doc_comment, &obj_api_class);
     obj_api_class += "export class ";
     obj_api_class += GetTypeName(struct_def, /*object_api=*/true);
     obj_api_class += " implements flatbuffers.IGeneratedObject {\n";
